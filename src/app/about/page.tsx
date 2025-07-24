@@ -42,6 +42,8 @@ export default function AboutPage() {
     }
   }
 
+    
+
   return (
     <div className="font-sans">
       {/* Hero section */}
@@ -106,7 +108,6 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
-      
       {/* Mission Statement */}
       <section className="py-16 bg-card relative overflow-hidden">
         <div className="absolute inset-0 circuit-bg opacity-5" />
@@ -141,14 +142,15 @@ export default function AboutPage() {
                 </p>
                 
                 <Button
-                  size="lg"
-                  className={`${applyAnimation("pulse")} bg-gradient text-primary-foreground`}
-                  asChild
-                >
-                  <Link href="/calendar">
-                    Explore Upcoming Events
-                  </Link>
+                    size="lg"
+                    asChild
+                    className={`${applyAnimation("pulse")} bg-gradient text-primary-foreground`}
+                  >
+                    <Link href="/calendar" >
+                      Explore Upcoming Events
+                    </Link>
                 </Button>
+                
               </motion.div>
               
               <motion.div

@@ -56,9 +56,18 @@ export function useInnovationTheme() {
   }
 
   // Apply animation class conditionally
-  const applyAnimation = (animationClass: string) => {
-    return animationsEnabled && !reducedMotion ? animationClass : ""
+  const applyAnimation = (name: string) => {
+  const animationMap: Record<string, string> = {
+    pulse: "animate-pulse",
+    bounce: "animate-bounce",
+    spin: "animate-spin",
+    wiggle: "animate-[wiggle_1s_ease-in-out_infinite]",
+    // Add more if needed
   }
+
+  return animationsEnabled && !reducedMotion ? animationMap[name] ?? "" : ""
+}
+
 
   return {
     theme,
