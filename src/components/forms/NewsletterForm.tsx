@@ -28,6 +28,8 @@ export function NewsletterForm() {
 
     try {
       // Simulate API call with a timeout
+      // TODO: Replace with actual API call using data  
+      console.log('Newsletter form data:', data)
       await new Promise(resolve => setTimeout(resolve, 1500))
       
       // In a real app, you would call your API endpoint here
@@ -49,6 +51,7 @@ export function NewsletterForm() {
         setIsSuccess(false)
       }, 5000)
     } catch (error) {
+      console.error('Newsletter submission error:', error)
       setErrorMessage("Failed to subscribe. Please try again.")
     } finally {
       setIsSubmitting(false)
@@ -108,7 +111,7 @@ export function NewsletterForm() {
             animate={{ opacity: 1, y: 0 }}
             className="text-xs text-green-500 dark:text-green-400"
           >
-            Thanks for subscribing! You'll receive our next innovation updates.
+            Thanks for subscribing! You&apos;ll receive our next innovation updates.
           </motion.p>
         )}
         

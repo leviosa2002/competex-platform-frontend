@@ -23,7 +23,7 @@ export function createUniqueId(): string {
   return Math.random().toString(36).substring(2, 9)
 }
 
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   delay: number
 ): (...args: Parameters<T>) => void {

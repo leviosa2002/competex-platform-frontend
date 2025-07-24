@@ -26,11 +26,11 @@ export interface PaginatedResponse<T> {
 }
 
 // Categories API
-export interface GetCategoriesResponse extends ApiResponse<InnovationCategory[]> {}
+export type GetCategoriesResponse = ApiResponse<InnovationCategory[]>
 
 // Events API
-export interface GetEventsResponse extends ApiResponse<PaginatedResponse<InnovationEvent>> {}
-export interface GetEventResponse extends ApiResponse<InnovationEvent> {}
+export type GetEventsResponse = ApiResponse<PaginatedResponse<InnovationEvent>>
+export type GetEventResponse = ApiResponse<InnovationEvent>
 
 export interface EventsParams {
   page?: number
@@ -42,8 +42,8 @@ export interface EventsParams {
 }
 
 // Prizes API
-export interface GetPrizesResponse extends ApiResponse<PaginatedResponse<InnovationPrize>> {}
-export interface GetPrizeResponse extends ApiResponse<InnovationPrize> {}
+export type GetPrizesResponse = ApiResponse<PaginatedResponse<InnovationPrize>>
+export type GetPrizeResponse = ApiResponse<InnovationPrize>
 
 export interface PrizesParams {
   page?: number
@@ -53,8 +53,8 @@ export interface PrizesParams {
 }
 
 // FAQ API
-export interface GetFaqsResponse extends ApiResponse<PaginatedResponse<FaqItem>> {}
-export interface GetFaqResponse extends ApiResponse<FaqItem> {}
+export type GetFaqsResponse = ApiResponse<PaginatedResponse<FaqItem>>
+export type GetFaqResponse = ApiResponse<FaqItem>
 
 export interface FaqParams {
   page?: number
@@ -64,8 +64,8 @@ export interface FaqParams {
 }
 
 // Success Stories API
-export interface GetSuccessStoriesResponse extends ApiResponse<PaginatedResponse<SuccessStory>> {}
-export interface GetSuccessStoryResponse extends ApiResponse<SuccessStory> {}
+export type GetSuccessStoriesResponse = ApiResponse<PaginatedResponse<SuccessStory>>
+export type GetSuccessStoryResponse = ApiResponse<SuccessStory>
 
 export interface SuccessStoriesParams {
   page?: number
@@ -76,11 +76,11 @@ export interface SuccessStoriesParams {
 }
 
 // Project Registration API
-export interface CreateProjectResponse extends ApiResponse<ProjectRegistration> {}
+export type CreateProjectResponse = ApiResponse<ProjectRegistration>
 
 // Innovation Challenges API
-export interface GetChallengesResponse extends ApiResponse<PaginatedResponse<InnovationChallenge>> {}
-export interface GetChallengeResponse extends ApiResponse<InnovationChallenge> {}
+export type GetChallengesResponse = ApiResponse<PaginatedResponse<InnovationChallenge>>
+export type GetChallengeResponse = ApiResponse<InnovationChallenge>
 
 export interface ChallengesParams {
   page?: number
@@ -98,7 +98,7 @@ export interface ContactFormSubmission {
   message: string
 }
 
-export interface ContactFormResponse extends ApiResponse<null> {}
+export type ContactFormResponse = ApiResponse<null>
 
 // Newsletter API
 export interface NewsletterSubscription {
@@ -106,4 +106,4 @@ export interface NewsletterSubscription {
   interests?: string[]
 }
 
-export interface NewsletterResponse extends ApiResponse<null> {} 
+export type NewsletterResponse = ApiResponse<null> 

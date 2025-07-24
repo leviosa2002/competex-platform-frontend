@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useMemo } from "react" // Added useMemo for potential future optimization
+import React, { useState, useMemo } from "react" // Added useMemo for potential future optimization
 import { motion } from "framer-motion"
 import { Award, Trophy, Search, Filter, ExternalLink } from "lucide-react"
 import { Card } from "@/components/ui/card"
@@ -27,7 +27,7 @@ export default function PrizesPage() {
 
       return categoryMatches && searchMatches
     })
-  }, [selectedCategory, searchQuery, innovationPrizes]) // Depend on all relevant state and data
+  }, [selectedCategory, searchQuery]) // Depend on all relevant state
 
   // No separate useEffect for filtering needed if using useMemo for filteredPrizes.
   // The state 'filteredPrizes' is now directly derived.

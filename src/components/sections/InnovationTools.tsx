@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { PenTool, Code, MessageCircle, Library, ArrowRight } from "lucide-react"
 import { INNOVATION_TOOLS } from "@/lib/constants"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 export function InnovationTools() {
@@ -40,8 +40,7 @@ export function InnovationTools() {
     hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, type: "spring" }
+      opacity: 1
     }
   }
   
@@ -73,7 +72,7 @@ export function InnovationTools() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {INNOVATION_TOOLS.map((tool, index) => (
+          {INNOVATION_TOOLS.map((tool) => (
             <motion.div
               key={tool.title}
               variants={itemVariants}

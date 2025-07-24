@@ -28,6 +28,8 @@ export function ContactForm() {
     
     try {
       // Simulate API call with a timeout
+      // TODO: Replace with actual API call using data
+      console.log('Contact form data:', data)
       await new Promise(resolve => setTimeout(resolve, 1500))
       
       // In a real app, you would call your API endpoint here
@@ -49,6 +51,7 @@ export function ContactForm() {
         setIsSuccess(false)
       }, 5000)
     } catch (error) {
+      console.error('Form submission error:', error)
       setErrorMessage("Failed to send message. Please try again.")
     } finally {
       setIsSubmitting(false)
@@ -95,7 +98,7 @@ export function ContactForm() {
           </div>
           <h3 className="text-xl font-bold mb-2">Message Sent!</h3>
           <p className="text-muted-foreground">
-            Thank you for reaching out. We'll get back to you as soon as possible.
+            Thank you for reaching out. We&apos;ll get back to you as soon as possible.
           </p>
           <Button
             className="mt-4 bg-gradient text-primary-foreground"

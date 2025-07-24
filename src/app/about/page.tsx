@@ -70,7 +70,7 @@ export default function AboutPage() {
               variants={itemVariants}
             >
               Empowering the next generation of innovators to create meaningful solutions
-              for tomorrow's challenges.
+              for tomorrow&apos;s challenges.
             </motion.p>
 
             {/* Animated floating elements */}
@@ -330,7 +330,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-lg text-muted-foreground">
               Have questions about CompeteX or interested in partnerships?
-              We'd love to hear from you.
+              We&apos;d love to hear from you.
             </p>
           </motion.div>
           

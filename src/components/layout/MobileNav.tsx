@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronRight } from "lucide-react"
+import { X, ChevronRight, Twitter, Linkedin, Instagram, Github } from "lucide-react"
 import { NAV_ITEMS, SOCIAL_LINKS } from "@/lib/constants"
 import { Button } from "@/components/ui/button"
 
@@ -16,28 +16,40 @@ interface MobileNavProps {
 export function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const pathname = usePathname()
 
+  // Get appropriate icon for social platform
+  const getSocialIcon = (platform: string) => {
+    switch (platform.toLowerCase()) {
+      case 'twitter':
+        return <Twitter className="w-5 h-5" />
+      case 'linkedin':
+        return <Linkedin className="w-5 h-5" />
+      case 'instagram':
+        return <Instagram className="w-5 h-5" />
+      case 'github':
+        return <Github className="w-5 h-5" />
+      default:
+        return <div className="w-5 h-5 bg-current rounded" />
+    }
+  }
+
   // Animation variants
   const overlayVariants = {
-    closed: { opacity: 0, pointerEvents: "none" },
+    closed: { opacity: 0, pointerEvents: "none" as const },
     open: { 
       opacity: 1, 
-      pointerEvents: "auto",
+      pointerEvents: "auto" as const,
       transition: { duration: 0.3 }
     }
   }
 
   const menuVariants = {
     closed: { 
-      x: "100%",
-      transition: { type: "tween", duration: 0.4, ease: "easeInOut" }
+      x: "100%"
     },
     open: { 
       x: 0,
       transition: { 
-        type: "tween", 
-        duration: 0.4, 
-        ease: "easeInOut",
-        when: "beforeChildren",
+        when: "beforeChildren" as const,
         staggerChildren: 0.1
       }
     }
@@ -47,8 +59,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
     closed: { x: 20, opacity: 0 },
     open: { 
       x: 0, 
-      opacity: 1,
-      transition: { type: "tween", duration: 0.4, ease: "easeOut" }
+      opacity: 1
     }
   }
 
@@ -148,7 +159,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     <span className="sr-only">{social.platform}</span>
                     {/* Use dynamic icon import based on platform */}
                     <div className="w-6 h-6 flex items-center justify-center">
-                      {social.icon}
+                      {getSocialIcon(social.platform)}
                     </div>
                   </motion.a>
                 ))}
