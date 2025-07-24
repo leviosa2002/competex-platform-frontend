@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { format, parseISO } from "date-fns"
 import { Calendar as CalendarIcon, Filter, MapPin, Clock, Globe } from "lucide-react"
 import { Card } from "@/components/ui/card"
@@ -46,37 +46,46 @@ export default function CalendarPage() {
     }
   }
   
-  // Filter events based on selected date, category, and search query
-  const filteredEvents = innovationEvents.filter(event => {
-    // Date filter
-    const eventDate = parseISO(event.date)
-    const dateMatches = !selectedDate || 
-      (eventDate.getDate() === selectedDate.getDate() &&
-       eventDate.getMonth() === selectedDate.getMonth() &&
-       eventDate.getFullYear() === selectedDate.getFullYear())
-    
-    // Category filter
-    const categoryMatches = !selectedCategory || 
-      selectedCategory === "all" || 
-      event.category === selectedCategory ||
-      (selectedCategory === "virtual" && event.isVirtual)
-    
-    // Search query filter
-    const searchMatches = !searchQuery || 
-      event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchQuery.toLowerCase())
-    
-    return dateMatches && categoryMatches && searchMatches
-  })
+  // Filter events based on selected date, category, and search query using useMemo
+  const filteredEvents = useMemo(() => {
+    return innovationEvents.filter(event => {
+      // Date filter
+      const eventDate = parseISO(event.date)
+      const dateMatches = !selectedDate || 
+        (eventDate.getDate() === selectedDate.getDate() &&
+        eventDate.getMonth() === selectedDate.getMonth() &&
+        eventDate.getFullYear() === selectedDate.getFullYear())
+      
+      // Category filter
+      const categoryMatches = !selectedCategory || 
+        selectedCategory === "all" || 
+        event.category === selectedCategory ||
+        (selectedCategory === "virtual" && event.isVirtual)
+      
+      // Search query filter
+      const searchMatches = !searchQuery || 
+        event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.description.toLowerCase().includes(searchQuery.toLowerCase())
+      
+      return dateMatches && categoryMatches && searchMatches
+    })
+  }, [selectedDate, selectedCategory, searchQuery])
   
   // Event dates for calendar highlighting
-  const eventDates = innovationEvents.map(event => parseISO(event.date))
+  const eventDates = useMemo(() => {
+    return innovationEvents.map(event => parseISO(event.date))
+  }, [])
   
   // Clear all filters
   const clearFilters = () => {
     setSelectedDate(undefined)
     setSelectedCategory(null)
     setSearchQuery("")
+  }
+
+  // Handle category change
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId)
   }
   
   return (
@@ -198,14 +207,18 @@ export default function CalendarPage() {
                     <h2 className="text-xl font-bold mb-4">Filters</h2>
                     
                     <div className="mb-4">
-                      <label className="block text-sm font-medium mb-2">Search Events</label>
-                      <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search events..."
-                        className="w-full px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
+                      <label htmlFor="search-events" className="block text-sm font-medium mb-2">Search Events</label>
+                      <div className="relative">
+                        <input
+                          id="search-events"
+                          type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          placeholder="Search events..."
+                          className="w-full px-3 py-2 pl-8 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                        />
+                        <CalendarIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                      </div>
                     </div>
                     
                     <div className="mb-6">
@@ -222,13 +235,18 @@ export default function CalendarPage() {
                           >
                             <input
                               type="radio"
-                              id={category.id}
-                              name="category"
+                              id={`event-category-${category.id}`}
+                              name="event-category"
+                              value={category.id}
                               checked={selectedCategory === category.id}
-                              onChange={() => setSelectedCategory(category.id)}
+                              onChange={() => handleCategoryChange(category.id)}
                               className="mr-2"
                             />
-                            <label htmlFor={category.id} className="text-sm">
+                            <label 
+                              htmlFor={`event-category-${category.id}`} 
+                              className="text-sm cursor-pointer"
+                              onClick={() => handleCategoryChange(category.id)}
+                            >
                               {category.name}
                             </label>
                           </motion.div>
@@ -281,6 +299,7 @@ export default function CalendarPage() {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
+                      key={`${selectedDate?.toISOString() || 'all'}-${selectedCategory || 'all'}-${searchQuery}`}
                     >
                       {filteredEvents.map((event, index) => (
                         <motion.div
@@ -379,6 +398,7 @@ export default function CalendarPage() {
                         onClick={clearFilters}
                         className={applyAnimation("pulse")}
                       >
+                        <Filter className="mr-2 h-4 w-4" />
                         Clear Filters
                       </Button>
                     </motion.div>
