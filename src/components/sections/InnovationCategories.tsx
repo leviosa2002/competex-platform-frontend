@@ -7,8 +7,10 @@ import { Cpu, Users, Briefcase, Paintbrush, ArrowRight } from "lucide-react"
 import { INNOVATION_CATEGORIES } from "@/lib/constants"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { useInnovationTheme } from "@/hooks/useInnovationTheme"
 
 export function InnovationCategories() {
+  const { applyAnimation } = useInnovationTheme()
   // Get the appropriate icon for a category
   const getCategoryIcon = (iconName: string, className: string = "h-8 w-8") => {
     switch (iconName) {
@@ -132,10 +134,10 @@ export function InnovationCategories() {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           <Button
-            size="lg"
-            className="bg-gradient text-primary-foreground"
-            asChild
-          >
+              size="lg"
+              asChild
+              className={`relative z-10 bg-gradient text-primary-foreground ${applyAnimation("pulse")}`}
+            >
             <Link href="/about">
               View All Competitions
             </Link>

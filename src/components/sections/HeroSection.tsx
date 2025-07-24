@@ -67,8 +67,8 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className={`${applyAnimation("pulse")} bg-gradient text-primary-foreground`}
               asChild
+              className={`relative z-10 bg-gradient text-primary-foreground ${applyAnimation("pulse")}`}
             >
               <Link href="/about">
                 Join Competition

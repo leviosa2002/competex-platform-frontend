@@ -142,10 +142,10 @@ export default function AboutPage() {
                 </p>
                 
                 <Button
-                    size="lg"
-                    asChild
-                    className={`${applyAnimation("pulse")} bg-gradient text-primary-foreground`}
-                  >
+                  size="lg"
+                  asChild
+                  className={`relative z-10 bg-gradient text-primary-foreground ${applyAnimation("pulse")}`}
+                >
                     <Link href="/calendar" >
                       Explore Upcoming Events
                     </Link>
